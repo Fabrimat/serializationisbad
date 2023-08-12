@@ -1,15 +1,3 @@
-/*
- * Forge Mod Loader
- * Copyright (c) 2012-2013 cpw.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Lesser Public License v2.1
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- *
- * Contributors:
- *     cpw - implementation
- */
-
 package cpw.mods.fml.relauncher;
 
 import java.lang.annotation.ElementType;
@@ -27,6 +15,12 @@ import java.util.Map;
  */
 public interface IFMLLoadingPlugin
 {
+    /**
+     * Return a list of classes that implement the ILibrarySet interface
+     *
+     * @return a list of classes that implement the ILibrarySet interface
+     */
+    String[] getLibraryRequestClass();
     /**
      * Return a list of classes that implements the IClassTransformer interface
      * @return a list of classes that implements the IClassTransformer interface
@@ -63,12 +57,6 @@ public interface IFMLLoadingPlugin
      */
     void injectData(Map<String, Object> data);
 
-    /**
-     * Return an optional access transformer class for this coremod. It will be injected post-deobf
-     * so ensure your ATs conform to the new srgnames scheme.
-     * @return the name of an access transformer class or null if none is provided
-     */
-    String getAccessTransformerClass();
 
     /**
      * Annotate your load plugin with a list of package prefixes that will *not* be
@@ -87,6 +75,14 @@ public interface IFMLLoadingPlugin
     {
         public String[] value() default "";
     }
+
+    /**
+     * Return an optional access transformer class for this coremod. It will be injected post-deobf
+     * so ensure your ATs conform to the new srgnames scheme.
+     * @return the name of an access transformer class or null if none is provided
+     */
+    String getAccessTransformerClass();
+
 
     /**
      * Use this to target a specific minecraft version for your coremod. It will refuse to load with an error if
@@ -132,5 +128,4 @@ public interface IFMLLoadingPlugin
     {
         public int value() default 0;
     }
-
 }

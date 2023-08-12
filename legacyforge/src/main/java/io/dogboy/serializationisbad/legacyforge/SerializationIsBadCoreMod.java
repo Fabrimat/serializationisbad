@@ -20,6 +20,11 @@ public class SerializationIsBadCoreMod implements net.minecraftforge.fml.relaunc
     }
 
     @Override
+    public String[] getLibraryRequestClass() {
+        return null;
+    }
+
+    @Override
     public String[] getASMTransformerClass() {
         if (SerializationIsBad.isAgentActive()) return new String[0];
 
